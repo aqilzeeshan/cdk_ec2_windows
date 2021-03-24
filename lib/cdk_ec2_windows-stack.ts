@@ -43,6 +43,13 @@ export class CdkEc2WindowsStack extends cdk.Stack {
     userData.addCommands('iex ((new-object net.webclient).DownloadString("https://chocolatey.org/install.ps1"))','install chocolatey')
     userData.addCommands('choco install googlechrome -y')
     userData.addCommands('choco install vscode -y')
+    userData.addCommands('Install-WindowsFeature Web-Server -IncludeManagementTools -IncludeAllSubFeature')
+    userData.addCommands('New-Item -ItemType directory -Path "C:\MyWebsite" -Force')
+    userData.addCommands('New-Item -ItemType File -Name "index.html" -Path "C:\MyWebsite\"')
+    userData.addCommands('Set-Content C:\MyWebsite\index.html "<html>Welcome to Our Site</html>"')
+    //userData.addCommands('New-IISSite -Name "MyWebsite" -PhysicalPath "C:\MyWebsite\" -BindingInformation "*:8088:"')
+    //userData.addCommands('Get-IISSite')
+
     // Pick a Windows edition to use
     const windows = ec2.MachineImage.latestWindows(ec2.WindowsVersion.WINDOWS_SERVER_2019_ENGLISH_FULL_BASE);
 
